@@ -1,0 +1,35 @@
+{
+  "name": "carno-php/database",
+  "license": "MIT",
+  "require": {
+    "php": "^7.2",
+    "carno-php/coroutine": "^1.0",
+    "carno-php/promise": "^1.0",
+    "carno-php/tracing": "^1.0",
+    "carno-php/cluster": "^1.0",
+    "carno-php/pool": "^1.0",
+    "carno-php/net": "^1.0",
+    "carno-php/dsn": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7",
+    "carno-php/config": "^1.0",
+    "carno-php/log-slim": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Carno\\Database\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Carno\\Database\\Tests\\": "tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}

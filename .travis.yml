@@ -1,0 +1,15 @@
+language: php
+
+php:
+- '7.2'
+
+services:
+- mysql
+
+install:
+- printf "\n\n\n\n\nyes\n\n" | pecl install swoole
+- composer install
+
+script:
+- ./vendor/bin/phpunit tests --repeat 100
+- php tests/cluster.php
