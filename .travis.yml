@@ -6,6 +6,9 @@ php:
 services:
 - mysql
 
+before_install:
+- mysql -e 'CREATE DATABASE IF NOT EXISTS `test` CHARACTER SET "utf8mb4" COLLATE "utf8mb4_general_ci";'
+
 install:
 - printf "\n\n\n\n\nyes\n\n" | pecl install swoole
 - composer install
