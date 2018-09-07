@@ -6,13 +6,24 @@ php:
 services:
 - mysql
 
+dist: trusty
+sudo: false
+
+cache:
+  directories:
+  - ~/.composer
+  - ~/.php-ext
+
 before_install:
 - mysql -e 'CREATE DATABASE IF NOT EXISTS `test` CHARACTER SET "utf8mb4" COLLATE "utf8mb4_general_ci";'
+- mysql -e 'CREATE TABLE `items` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `key` char(32) NOT NULL, `val` char(128) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'
+- source <(curl -sL https://github.com/carno-php/travis-ci/raw/master/tests-prepare.sh)
 
 install:
-- printf "\n\n\n\n\nyes\n\n" | pecl install swoole
-- composer install
+- composer update
 
 script:
-- ./vendor/bin/phpunit tests --repeat 100
-- php tests/cluster.php
+- testing
+
+after_success:
+- coveralls

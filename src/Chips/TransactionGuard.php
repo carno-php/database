@@ -60,7 +60,7 @@ trait TransactionGuard
             // call user program
             $finished = yield $program($session);
             // automatic commit
-            $commit->pended() && yield $session->commit();
+            $commit->pended() && $rollback->pended() && yield $session->commit();
             // finished
             return $finished;
         } catch (Throwable $e) {
