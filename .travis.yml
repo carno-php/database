@@ -16,7 +16,7 @@ cache:
 
 before_install:
 - mysql -e 'CREATE DATABASE IF NOT EXISTS `test` CHARACTER SET "utf8mb4" COLLATE "utf8mb4_general_ci";'
-- mysql -e 'CREATE TABLE `items` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `key` char(32) NOT NULL, `val` char(128) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'
+- mysql -e 'USE `test`;CREATE TABLE `items` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `key` char(32) NOT NULL, `val` char(128) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'
 - source <(curl -sL https://github.com/carno-php/travis-ci/raw/master/tests-prepare.sh)
 
 install:
