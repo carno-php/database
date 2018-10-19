@@ -57,10 +57,10 @@ abstract class MySQL extends Managed implements Executable
     }
 
     /**
-     * @param string $service
+     * @param Endpoint $endpoint
      * @return Options
      */
-    abstract protected function options(string $service) : Options;
+    abstract protected function options(Endpoint $endpoint) : Options;
 
     /**
      * @param Endpoint $endpoint
@@ -77,7 +77,7 @@ abstract class MySQL extends Managed implements Executable
             $dsn->option('execute', $this->timeout)
         );
 
-        return new Pool($this->options($endpoint->service()), static function () use ($timeouts, $dsn, $vid) {
+        return new Pool($this->options($endpoint), static function () use ($timeouts, $dsn, $vid) {
             return new Connector(
                 $dsn->host(),
                 $dsn->port() ?: 3306,

@@ -18,6 +18,7 @@ use Carno\Database\Programs\Transaction;
 use Carno\Database\Results\Created;
 use Carno\Database\Results\Selected;
 use Carno\Database\Results\Updated;
+use Carno\Net\Endpoint;
 use Carno\Pool\Options;
 use PHPUnit\Framework\TestCase;
 use Closure;
@@ -49,7 +50,7 @@ class ClusterTest extends TestCase
         return $this->mysql = new class($cluster) extends MySQL {
             protected $server = 'test1';
             protected $timeout = 500;
-            protected function options(string $service) : Options
+            protected function options(Endpoint $endpoint) : Options
             {
                 return new Options;
             }
@@ -95,7 +96,7 @@ class ClusterTest extends TestCase
             $this->assertInstanceOf(Selected::class, $selected);
 
             $this->assertEquals(1, $selected->count());
-            $this->assertArraySubset((array)$selected, [[
+            $this->assertEquals((array)$selected, [[
                 'id' => $id,
                 'key' => 'hello',
                 'val' => 'world',
