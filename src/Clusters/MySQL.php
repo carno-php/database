@@ -8,6 +8,7 @@
 
 namespace Carno\Database\Clusters;
 
+use Carno\Cluster\Classify\Scenes;
 use Carno\Cluster\Contracts\Tags;
 use Carno\Cluster\Managed;
 use Carno\Cluster\Resources;
@@ -53,7 +54,7 @@ abstract class MySQL extends Managed implements Executable
      */
     public function __construct(Resources $resources)
     {
-        $resources->initialize($this->type, $this->server, $this);
+        $resources->initialize(Scenes::RESOURCE, $this->type, $this->server, $this);
     }
 
     /**

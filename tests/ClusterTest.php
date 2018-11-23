@@ -8,7 +8,9 @@
 
 namespace Carno\Database\Tests;
 
-use Carno\Cluster\Discover\Adaptors\Config as SD;
+use Carno\Cluster\Classify\Scenes;
+use Carno\Cluster\Classify\Selector;
+use Carno\Cluster\Discovery\Adaptors\Config as SD;
 use Carno\Cluster\Resources;
 use Carno\Config\Config;
 use function Carno\Coroutine\async;
@@ -43,7 +45,9 @@ class ClusterTest extends TestCase
             return $this->mysql;
         }
 
-        $this->cluster = $cluster = new Resources(new SD($conf = new Config));
+        ($s = new Selector)->assigning(Scenes::RESOURCE, new SD($conf = new Config));
+
+        $this->cluster = $cluster = new Resources($s);
 
         $conf->set('mysql:test1', 'mysql://root@localhost/test?charset=utf8mb4');
 
